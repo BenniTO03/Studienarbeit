@@ -2,7 +2,7 @@ import os
 import cv2
 
 
-DATA_DIR = './data_new'
+DATA_DIR = './data_new/test'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
