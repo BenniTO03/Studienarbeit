@@ -1,0 +1,11 @@
+Datensatz mit public license (data/train)
+Bilder aus Datensatz public license mit crop.ipynb auf Hand zugeschnitten
+neue Bilder mit Webcam aufgenommen (data_new/1) mit generate_data.py
+data_new/1 mit crop.ipynb auf Hand zugeschnitten (data_new/1_crop)
+-> Möglichkeit 1 neue Bilder zum Datenatz hinzuzufügen
+
+Bilder mit Webcam aufnehmen und gleich zuschneiden mit crop_save.py
+-> Möglichkeit 2 neue Bilder zum Datenatz hinzuzufügen
+-> funktioniert noch nicht
+
+Vorgefertigtes Modell erstellen möglich auf teachablemachine.withgoogle.com
