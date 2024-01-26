@@ -1,0 +1,18 @@
+- generate_data.py Aufrufen und ausführen
+-> dabei die Bilder in einen separaten Ordner abspeichern
+-> in diesem Ordner werden die Bilder im Unterordner mit Zahlen gespeichert: 
+"Sep_Ordner/0/0.jpg", "Sep_Ordner/1"...
+
+- Neu generierte Bilder zu data_original hinzufügen
+-> dafür namen.py verwenden um den Namen der Bilder anzupassen, damit es keine Duplikate an Dateinamen gibt
+source_path = Sep_Ordner/0
+destination_path = 01_data_original/train/Buchstabe
+
+- neu generierte Bilder auf Hand zuschneiden
+-> crop.py
+source_path = Sep_Ordner/0
+destination_path = Sep_Ordner/0
+
+- zugeschnittene Bilder zu data_crop hinzufügen
+source_path = Sep_Ordner/0
+destination_path = 02_data_crop
