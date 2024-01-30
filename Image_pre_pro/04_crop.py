@@ -87,5 +87,5 @@ def Crop_Images_Hands(input_folder):
      except Exception as e:
           print(str(e))
 
-source_path = '../data_new/test/1/1'
+source_path = '../test'
 Crop_Images_Hands(input_folder=source_path)

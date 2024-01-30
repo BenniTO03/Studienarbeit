@@ -11,11 +11,11 @@ import os
 import cv2
 
 # Ordner in den gespeichert werden soll
-DATA_DIR = './data_new/test/1'
+DATA_DIR = '../sep6'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
-number_of_classes = 3
+number_of_classes = 2
 dataset_size = 50
 
 # Kamera
