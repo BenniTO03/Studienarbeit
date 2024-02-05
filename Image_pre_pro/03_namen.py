@@ -11,11 +11,11 @@ anpassen:
   - start_number  -> damit es keine Duplikate gibt bei nächstgrößer Zahl anfangen, die schon vergeben ist
 """
 
-target_folder = '../02_data_crop/train/e'
-images_folder = '../sep6/4'
+target_folder = '../02_data_crop/train/y'
+images_folder = '../sep20/4'
 
-prefix = 'e'
-start_number = 181
+prefix = 'y'
+start_number = 241
 
 
 for file in os.listdir(images_folder):
