@@ -1,7 +1,13 @@
 import tensorflow as tf
 import os
 import json
+import tempfile
+from natsort import natsorted
 
+"""
+  speichert Bilder als tensors
+  speichert Ordnername als Label
+"""
 def get_images(images_path):
 
     images_dirs = os.listdir(images_path)   # folder of single buchstabe   -> a,b,c,d,e,f,g,h,i,j,k, ...
@@ -9,7 +15,7 @@ def get_images(images_path):
     tensor_l = []
 
     # get images as tensors
-    for folder in os.listdir(images_path):
+    for folder in natsorted(os.listdir(images_path)):
         label = folder   # a,b,c,d, ...
 
         for file in os.listdir(os.path.join(images_path, folder)):
@@ -32,42 +38,51 @@ def create_model(train_dataset, test_dataset):
     model = tf.keras.Sequential([
         tf.keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(256,256,3)),  # 32 Feature-Maps, Größe des Filters, Aktivierungsfunktion, Bildgröße
         tf.keras.layers.MaxPooling2D((2,2)),   # Größe des Pooling-Fensters
-        #tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
-        #tf.keras.layers.MaxPooling2D((2,2)),
-        #tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+        tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+        tf.keras.layers.MaxPooling2D((2,2)),
+        tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
         tf.keras.layers.Flatten(),
-        tf.keras.layers.Dense(256, activation='relu'), # Anzahl Neuronen
-        #tf.keras.layers.Dense(8),
+        tf.keras.layers.Dense(10, activation='relu'), # Anzahl Neuronen
+        tf.keras.layers.Dense(5),
         #tf.keras.layers.Reshape((4,2), input_shape=(None, 8))
     ])
 
-    model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
+    model.compile(optimizer='adam',
+                   loss= 'mean_squared_error', 
+                   metrics=[tf.keras.metrics.SparseCategoricalAccuracy()])
+    # 'mean_squared_error'
 
     # train model
     model.fit(train_dataset, epochs=10)
     test_loss, test_accuracy = model.evaluate(test_dataset)
-    # TODO: create a folder to save the model. Please do not try to push the model (save it outside the repository)
-    # model.save("src/test_model")
     print(f"test loss: {test_loss}")
-    print(f"test accuracy: {test_accuracy}")
+    print('\nTest accuracy: {}'.format(test_accuracy))
 
+    return model
 
-def load_model(model_path, test_input):
-    saved_model = tf.keras.models.load_model(model_path)
-    saved_model.fit(test_input)
+"""
+    def load_model(model_path, test_input):
+        saved_model = tf.keras.models.load_model(model_path)
+        saved_model.fit(test_input)
 
-    print(saved_model)
-
+        print(saved_model)
+"""
 
 if __name__ == "__main__":
     tensor_images, tensor_label = get_images(images_path = "./train/" )
-    print(f'tensor_image: {tensor_images[420]}')
-    print(f'tensor_label: {tensor_label[420]}')
+    print(f'tensor_image: {tensor_images[418]}')
+    print(f'tensor_label: {tensor_label[418]}')
 
+    # Hier kannst du überprüfen, ob das Bild und das Label korrekt zusammengefügt wurden
     tf_dataset = tf.data.Dataset.from_tensor_slices((tensor_images, tensor_label))
+    #element_index = 419
+    #desired_element = tf_dataset.skip(element_index).take(1)
+    #for image, label in desired_element:
+     #   print("Label:", label)
+
 
     # split dataset in train, test & val
-    train_size = int(0.7 * 7601) # hart codiert :(
+    train_size = int(0.7 * 7601) # hart codiert 
     val_size = int(0.15 * 7601)
     test_size = int(0.15 * 7601)
 
@@ -83,10 +98,25 @@ if __name__ == "__main__":
 
     print(len(test_dataset), len(train_dataset), len(val_dataset))
 
-    create_model(train_dataset=train_dataset, test_dataset=test_dataset)
+    model = create_model(train_dataset=train_dataset, test_dataset=test_dataset)
 
-    # TODO: input path to your saved model
-    model_path = "./model/test_model"
-    load_model(model_path, test_dataset)
+    # save model
+    #load_model(model_path, test_dataset)
+    MODEL_DIR = "./model/test_model"
+    version = 1
+    export_path = os.path.join(MODEL_DIR, str(version))
+    print('export_path = {}\n'.format(export_path))
+
+    tf.keras.models.save_model(
+        model,
+        export_path,
+        overwrite=True,
+        include_optimizer=True,
+        save_format=None,
+        signatures=None,
+        options=None
+    )
+
+    print('\nSaved model:')
 
 
