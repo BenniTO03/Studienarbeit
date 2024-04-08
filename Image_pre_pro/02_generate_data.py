@@ -11,7 +11,7 @@ import os
 import cv2
 
 # Ordner in den gespeichert werden soll
-DATA_DIR = '../sep6'
+DATA_DIR = './sep1'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
