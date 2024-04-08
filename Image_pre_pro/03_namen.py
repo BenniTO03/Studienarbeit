@@ -11,15 +11,17 @@ anpassen:
   - start_number  -> damit es keine Duplikate gibt bei nächstgrößer Zahl anfangen, die schon vergeben ist
 """
 
-target_folder = '../02_data_crop/train/y'
-images_folder = '../sep20/4'
+target_folder = '../02_data_crop/test/a'
+images_folder = '../02_data_crop/test/abb'
 
-prefix = 'y'
-start_number = 241
+prefix = 'a_test'
+start_number = 1
 
+if not os.path.exists(target_folder):
+    os.makedirs(target_folder)
 
 for file in os.listdir(images_folder):
-    if file.endswith('.jpg'):
+    if file.endswith('.jpg') or file.endswith('.jpeg'):
 
         source_path = os.path.join(images_folder, file)
         destination_path = os.path.join(target_folder, '{}_{:05d}.jpg'.format(prefix, start_number))

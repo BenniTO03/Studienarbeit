@@ -5,12 +5,12 @@ import cv2
 import os
 
 """
-Detektion der Hand im Bild
-entsprechendes Zuschneiden des Bildes
-alte Bilder werden gelöscht und zugeschnittene Bilder im gleichen Ordner gespeichert
+     Detektion der Hand im Bild
+     entsprechendes Zuschneiden des Bildes
+     alte Bilder werden gelöscht und zugeschnittene Bilder im gleichen Ordner gespeichert
 
-anpassen:
-   - source_path
+     anpassen:
+     - source_path
 """
 
 
@@ -87,5 +87,5 @@ def Crop_Images_Hands(input_folder):
      except Exception as e:
           print(str(e))
 
-source_path = '../sep20/4'
+source_path = '../asl_dataset/b'
 Crop_Images_Hands(input_folder=source_path)
