@@ -11,10 +11,10 @@ anpassen:
   - start_number  -> damit es keine Duplikate gibt bei nächstgrößer Zahl anfangen, die schon vergeben ist
 """
 
-target_folder = '../02_data_crop/test/a'
-images_folder = '../02_data_crop/test/abb'
+target_folder = '../02_data_crop/test/26'
+images_folder = '../02_data_crop/test/26'
 
-prefix = 'a_test'
+prefix = 'z_test'
 start_number = 1
 
 if not os.path.exists(target_folder):
