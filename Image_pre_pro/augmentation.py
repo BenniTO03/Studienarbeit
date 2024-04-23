@@ -13,6 +13,7 @@ def flip(image_array):
     random_flip = tf.keras.Sequential([layers.RandomFlip("horizontal_and_vertical"),layers.RandomRotation(0.2),])
     random_flipped_array = random_flip(image_array)
     flipped_im = tf.keras.utils.array_to_img(random_flipped_array)
+    return flipped_im
 
 def zoom(image_array):
     # verwischt Teile des Bildes
@@ -64,19 +65,26 @@ def shift(image_array):
 
 
 def get_images(images_path, prefix, start_number):
-    
+    count = 0
     for file in os.listdir(images_path):
         filepath = os.path.join(images_path, file)
         if filepath.lower().endswith(('.jpeg', '.jpg')):
-            img = Image.open(filepath)
-            image_array  = tf.keras.utils.img_to_array(img)
+            count += 1
 
-            # Art der Augmentation
-            shift_image = shift(image_array)
+            if count % 7 == 0:
+                img = Image.open(filepath)
+                image_array  = tf.keras.utils.img_to_array(img)
 
-            destination_path = os.path.join(images_path, '{}_{:05d}.jpg'.format(prefix, start_number))
-            shift_image.save(destination_path)
-            start_number += 1
+                # Art der Augmentation
+                #save_image = shift(image_array)
+                save_image = shear(image_array)
+                #save_image = rotate(image_array)
+                #save_image = flip(image_array)
+                #save_image = zoom(image_array)
+
+                destination_path = os.path.join(images_path, '{}_{:05d}.jpg'.format(prefix, start_number))
+                save_image.save(destination_path)
+                start_number += 1
 
 if __name__ == "__main__":
     """
@@ -85,7 +93,7 @@ if __name__ == "__main__":
     start_number ist nächsthöhere Zahl des letzten files
     in get_images muss Art der Augmentation angegeben werden
     """
-    images_path = '../02_data_crop/test/1'
-    prefix = 'a_test'
-    start_number = 15
+    images_path = '../02_data_crop/train/26'
+    prefix = 'z'
+    start_number = 162
     get_images(images_path, prefix, start_number)
