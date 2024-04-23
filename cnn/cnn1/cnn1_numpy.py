@@ -49,7 +49,7 @@ class Data:
                 if filepath.lower().endswith(('.jpeg', '.jpg')):
                     image = tf.io.read_file(filepath)
                     tensor_image = tf.io.decode_image(image, channels=1, dtype=tf.dtypes.float32)
-                    tensor_image = tf.image.resize(tensor_image, [250, 250])
+                    tensor_image = tf.image.resize(tensor_image, [64, 64])
 
                     # Array von TensorFlow Tensoren
                     array_images.append(tensor_image)
@@ -77,8 +77,8 @@ class Data_preparation:
     """
 
     def __init__(self):
-        self.data_train = Data('cnn/resized_images/train')
-        self.data_test = Data('cnn/resized_images/test')
+        self.data_train = Data('02_data_crop/train')
+        self.data_test = Data('02_data_crop/test')
  
 
     def get_data_as_array(self):
@@ -146,7 +146,7 @@ class Model:
         num_classes = 27
 
             # Detektion
-        model.add(Conv2D(32, kernel_size=(5,5), activation= 'relu', input_shape=self.input_shape)) # input shape der images
+        model.add(Conv2D(32, kernel_size=(5,5), activation= 'relu', input_shape=(64,64,1))) # input shape der images
 
             # Conv_Block 2
         model.add(Conv2D(64, kernel_size=(5,5), activation='relu'))
@@ -224,9 +224,9 @@ if __name__ == "__main__":
 
     input_shape = train_numpy_images.shape[1:]
     print(input_shape)
-    #cnn = Model(train_normalized_images, train_binary_labels, test_normalized_images, test_binary_labels, input_shape)
-    #cnn.compile()
-    #cnn.train()
-    #cnn.evaluate()
-    #cnn.save()
+    cnn = Model(train_normalized_images, train_binary_labels, test_normalized_images, test_binary_labels, input_shape)
+    cnn.compile()
+    cnn.train()
+    cnn.evaluate()
+    cnn.save()
 
