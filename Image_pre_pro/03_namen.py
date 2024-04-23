@@ -12,11 +12,10 @@ anpassen:
 """
 
 target_folder = '../02_data_crop/test/26'
-images_folder = '../02_data_crop/test/26'
+images_folder = './sep1/25'
 
 prefix = 'z_test'
-start_number = 1
-
+start_number = 10
 if not os.path.exists(target_folder):
     os.makedirs(target_folder)
 
