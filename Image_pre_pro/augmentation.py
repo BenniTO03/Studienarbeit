@@ -33,7 +33,7 @@ def rotate(image_array):
 def brightness(image_array):
     # verändert Helligkeit
     # hat keine großen Auswirkungen
-    random_brightness = tf.keras.Sequential([layers.RandomBrightness(factor=0.1),])
+    random_brightness = tf.keras.Sequential([layers.RandomBrightness(factor=0.9),])
     random_brightness_array = random_brightness(image_array)
     brightness_im = tf.keras.utils.array_to_img(random_brightness_array)
     return brightness_im
@@ -71,7 +71,7 @@ def get_images(images_path, prefix, start_number):
         if filepath.lower().endswith(('.jpeg', '.jpg')):
             count += 1
 
-            if count % 7 == 0:
+            if count % 2 == 0:
                 img = Image.open(filepath)
                 image_array  = tf.keras.utils.img_to_array(img)
 
@@ -81,6 +81,7 @@ def get_images(images_path, prefix, start_number):
                 #save_image = rotate(image_array)
                 #save_image = flip(image_array)
                 #save_image = zoom(image_array)
+                #save_image = brightness(image_array)
 
                 destination_path = os.path.join(images_path, '{}_{:05d}.jpg'.format(prefix, start_number))
                 save_image.save(destination_path)
@@ -93,7 +94,7 @@ if __name__ == "__main__":
     start_number ist nächsthöhere Zahl des letzten files
     in get_images muss Art der Augmentation angegeben werden
     """
-    images_path = '../02_data_crop/train/26'
-    prefix = 'z'
-    start_number = 162
+    images_path = '../02_data_crop/test/26'
+    prefix = 'z_test'
+    start_number = 7
     get_images(images_path, prefix, start_number)
