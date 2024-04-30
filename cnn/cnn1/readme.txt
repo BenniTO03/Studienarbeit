@@ -10,6 +10,3 @@ erstes eigenes Modell
 
 - cnn1_test copy.py 
   anfangs notebook, erst Umwandlung in tensorflow, dann in numpy -> umständliche und unnötige Zweifach-Umwandlung
-
-- tf.py
-  Versuch statt numpy arrays tensorflows zu nutzen
