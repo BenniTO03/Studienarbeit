@@ -1,5 +1,7 @@
-# Bilder werden aufgenommen nach Beuntzereingabe
-# originale Bilder und zugeschnittene Bilder werden in Ordnern gespeichert
+"""
+Images are captured based on user input
+Original images and cropped images are saved in folders
+"""
 
 import cv2
 import os
@@ -7,13 +9,11 @@ import numpy as np
 import math
 
 from cvzone.HandTrackingModule import HandDetector
-import time
 from picamera2 import Picamera2, Preview
 from libcamera import controls
 
 
-
-class Kamera():
+class Camera():
     def __init__(self):
         self.first_image_saved = False
         self.folder_name = None
@@ -32,15 +32,16 @@ class Kamera():
             picam.start()
 
             if cv2.waitKey(25) == ord('s'):
+                # define label of the image
                 description = input("Gib den Buchstaben für das gezeigte Bild ein: ")
-                # save image
                 
+                # save image (not in a seperate function, because of the initialisation of picam)
                 if not self.first_image_saved:
-                    self.folder_name = self.create_folder('./images')
-                    self.first_image_saved = True
-                filename = f'{str(counter).zfill(2)}_{description}.jpg'
+                    self.folder_name = self.create_folder('./images')  # first folder
+                    self.first_image_saved = True  # set to true to start iterating the folders
+                filename = f'{str(counter).zfill(2)}_{description}.jpg' # filename with counter and label
                 filepath = os.path.join(self.folder_name, filename)
-                picam.capture(filepath)
+                picam.capture(filepath) # save image
 
                 self.saved_image_path = self.folder_name
 
@@ -49,7 +50,7 @@ class Kamera():
                 while True:
                      choice = input("Möchtest du ein weiteres Bild aufnehmen? Drücke 's' für ja und 'q' für nein: ")
                      if choice == 's':
-                          break
+                          break # repeat top loop
                      elif choice == 'q':
                           picam.stop_preview()
                           picam.stop()
@@ -62,24 +63,19 @@ class Kamera():
                 return
 
 
-         
-
     def take_image(self):
-        # Zugriff auf Rasperry Pi Kamera
         print("Drücke die Taste 's', um ein Bild aufzunehmen.")
         print("Drücke die Taste 'q', um das Programm zu beenden.")
-
-        
-        self.camera_module_pi()
-        self.get_hand()
+        self.camera_module_pi() # get original images from pi camera
+        self.get_hand()  # find hand in the images and crop them
 
     
     def create_folder(self, folder_name):
-        if not os.path.exists(folder_name):
+        # checks wether folder already exists
+        if not os.path.exists(folder_name):  
             os.makedirs(folder_name)
-
             return folder_name
-        else:
+        else: # creates folders with ascending numbering
             i = 1
             while True:
                 new_folder_name = f'{folder_name}_{str(i).zfill(2)}'
@@ -88,12 +84,9 @@ class Kamera():
                     return new_folder_name
                 i += 1
 
-
-
-
     
     def get_hand(self):
-
+        # find hand in image and crops it accordingly
         if self.saved_image_path is not None:
             img_path = self.saved_image_path
 
@@ -123,7 +116,7 @@ class Kamera():
                         hand = hands[0]
                         x,y,w,h = hand['bbox']
                         
-                        # Bounding Box um Hand
+                        # Bounding Box around hand
                         if y > offset and x > offset:
                                 offset = 20
                         elif y < offset and x > offset:
@@ -138,7 +131,7 @@ class Kamera():
 
                         aspectRatio = h/w
                 
-                        # Höhe > Breite -> vertikales Bild
+                        # height > width -> vertical image
                         if aspectRatio > 1:
                                 k = imgSize/h
                                 wCal = math.ceil(k * w)
@@ -148,7 +141,7 @@ class Kamera():
 
                                 imgWhite[:, wGap:wCal+wGap] = imgResize
                     
-                        # horizontales Bild
+                        # horizontal image
                         else:
                                 k = imgSize/w
                                 hCal = math.ceil(k * h)
@@ -157,14 +150,14 @@ class Kamera():
                                 hGap = math.ceil((imgSize-hCal) / 2)
 
                                 imgWhite[hGap:hCal+hGap:] = imgResize
-
+                        # save croped images in subfolder
                         crop_folder = "hands_croped"
                         crop_path = os.path.join(img_path, crop_folder)
                         
                         if not os.path.exists(crop_path):
                             os.makedirs(crop_path)
 
-                        new_file_name = f'{str(counter).zfill(2)}_{letter}.jpg'
+                        new_file_name = f'{str(counter).zfill(2)}_{letter}.jpg' # same letter as in original image
                         new_path = os.path.join(crop_path, new_file_name)
 
                         cv2.imwrite(new_path, imgWhite)

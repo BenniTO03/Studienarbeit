@@ -1,24 +1,22 @@
 import os
-from get_images import Kamera
+from get_images import Camera
 from get_predictions import Model
 from get_predictions import ImageClassificationBase
 from get_predictions import NaturalSceneClassification
 
 def get_word(data_dir):
-    # put single imagaes into word
+    # takes the label from file name of each image and saves it in array
     letters_per_img = []
-
     for filename in os.listdir(data_dir):
         if filename.endswith('.jpg'):
             letter = filename.split('_')[1].split('.')[0]
-
             letters_per_img.append(letter)
         else:
             print("Keine gültige Datei.")
-        
     return letters_per_img
 
 def check_prediction(real_letters, predicted_letters):
+    # checks wether predicted word and real word are the same
     predicted_word = ''.join(predicted_letters)
     real_word = ''.join(real_letters)
     print(f'vorhergesagtes Wort: {predicted_word}')
@@ -40,11 +38,11 @@ def check_prediction(real_letters, predicted_letters):
     return real_word
 
 
-def correct_word(word):
-    return word
+def correct_word(x):
+    return x
 
 if __name__ == '__main__':
-    camera = Kamera()
+    camera = Camera()
     camera.take_image()
 
     # get predictions
@@ -54,8 +52,8 @@ if __name__ == '__main__':
     naturalSceneClassification = NaturalSceneClassification()
     model = Model(model_path, data_dir)
     predicted_letters = model.predict_image()
-
+    
+    # get correct word
     real_letters_per_img = get_word(data_dir)
-    real_word = check_prediction(real_letters_per_img, predicted_letters)
-
-    real_word_for_roboter = correct_word(real_word)
+    word = check_prediction(real_letters_per_img, predicted_letters)
+    real_word_for_roboter = correct_word(word)
