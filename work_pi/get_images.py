@@ -20,16 +20,17 @@ class Camera():
 
     def camera_module_pi(self):
         print("Die Kamera wird nun gestartet.")
-        picam = Picamera2()  # object to reference the module and control the camera
         counter = 1
 
         while True:
-            config = picam.create_preview_configuration()
-            picam.configure(config)
+            picam = Picamera2()
             picam.start_preview(Preview.QTGL)  # start the preview window
+            preview_config = picam.create_preview_configuration()
+            picam.configure(preview_config)
+            picam.start()
+            time.sleep(5)
 
             print("Ready? Press 's' ! :)")
-            picam.start()
 
             if cv2.waitKey(25) == ord('s'):
                 # define label of the image
