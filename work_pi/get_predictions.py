@@ -6,6 +6,8 @@ from torchvision import transforms
 import torch.nn as nn
 import torch.nn.functional as F
 
+from natsort import natsorted
+
 
 class ImageClassificationBase(nn.Module):
     
@@ -80,7 +82,9 @@ class Model():
         # iterates over images in folder and makes predictions using the model
         transform = transforms.Compose([transforms.Resize((64,64)),transforms.ToTensor()])  # same transformations as in the model
         predicted_letters = []
-        for image_name in os.listdir(data_dir):
+        print("Data Directory: ", str(data_dir))
+        print("Data Directory: ", str(natsorted(os.listdir(data_dir))))
+        for image_name in natsorted(os.listdir(data_dir)):
             image_path = os.path.join(data_dir, image_name)
             image = Image.open(image_path)
             image_tensor = transform(image).unsqueeze(0) # add channel
