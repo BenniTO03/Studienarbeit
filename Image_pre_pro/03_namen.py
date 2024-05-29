@@ -12,7 +12,7 @@ anpassen:
 """
 
 target_folder = '../02_data_crop/test/26'
-images_folder = './sep1/25'
+images_folder = '../data/0'
 
 prefix = 'z_test'
 start_number = 10
