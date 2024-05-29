@@ -10,7 +10,7 @@ from keras import layers
 
 def flip(image_array):
     # spiegelt Hand
-    random_flip = tf.keras.Sequential([layers.RandomFlip("horizontal_and_vertical"),layers.RandomRotation(0.2),])
+    random_flip = tf.keras.Sequential([layers.RandomFlip("horizontal_and_vertical"),layers.RandomRotation(0.1),])
     random_flipped_array = random_flip(image_array)
     flipped_im = tf.keras.utils.array_to_img(random_flipped_array)
     return flipped_im
@@ -25,7 +25,7 @@ def zoom(image_array):
 
 def rotate(image_array):
     # dreht Hand um factor
-    random_rotate = tf.keras.Sequential([layers.RandomRotation(factor=0.5)])
+    random_rotate = tf.keras.Sequential([layers.RandomRotation(factor=0.2)])
     random_rotate_array = random_rotate(image_array)
     rotated_im = tf.keras.utils.array_to_img(random_rotate_array)
     return rotated_im
@@ -33,7 +33,7 @@ def rotate(image_array):
 def brightness(image_array):
     # verändert Helligkeit
     # hat keine großen Auswirkungen
-    random_brightness = tf.keras.Sequential([layers.RandomBrightness(factor=0.9),])
+    random_brightness = tf.keras.Sequential([layers.RandomBrightness(factor=0.6),])
     random_brightness_array = random_brightness(image_array)
     brightness_im = tf.keras.utils.array_to_img(random_brightness_array)
     return brightness_im
@@ -71,14 +71,14 @@ def get_images(images_path, prefix, start_number):
         if filepath.lower().endswith(('.jpeg', '.jpg')):
             count += 1
 
-            if count % 2 == 0:
+            if count % 57 == 0:
                 img = Image.open(filepath)
                 image_array  = tf.keras.utils.img_to_array(img)
 
                 # Art der Augmentation
                 #save_image = shift(image_array)
-                save_image = shear(image_array)
-                #save_image = rotate(image_array)
+                #save_image = shear(image_array)
+                save_image = rotate(image_array)
                 #save_image = flip(image_array)
                 #save_image = zoom(image_array)
                 #save_image = brightness(image_array)
@@ -94,7 +94,7 @@ if __name__ == "__main__":
     start_number ist nächsthöhere Zahl des letzten files
     in get_images muss Art der Augmentation angegeben werden
     """
-    images_path = '../02_data_crop/test/26'
+    images_path = './02_data_crop/test/25'
     prefix = 'z_test'
-    start_number = 7
+    start_number = 192
     get_images(images_path, prefix, start_number)
