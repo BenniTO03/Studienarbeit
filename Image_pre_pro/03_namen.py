@@ -11,11 +11,11 @@ anpassen:
   - start_number  -> damit es keine Duplikate gibt bei nächstgrößer Zahl anfangen, die schon vergeben ist
 """
 
-target_folder = '../02_data_crop/test/26'
-images_folder = '../data/0'
+target_folder = './02_data_crop/test/25'
+images_folder = './data/0'
 
 prefix = 'z_test'
-start_number = 10
+start_number = 40
 if not os.path.exists(target_folder):
     os.makedirs(target_folder)
 

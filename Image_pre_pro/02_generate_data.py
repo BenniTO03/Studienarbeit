@@ -15,11 +15,11 @@ DATA_DIR = './data'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
-number_of_classes = 26
-dataset_size = 50
+number_of_classes = 1
+dataset_size = 90
 
 # Kamera
-desired_fps = 10  # Bilder pro Sekunde
+desired_fps = 6  # Bilder pro Sekunde
 cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FPS, desired_fps)
 # geht sequentiell alle angegebenen Klassen durch 
