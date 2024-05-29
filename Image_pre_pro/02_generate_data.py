@@ -11,12 +11,12 @@ import os
 import cv2
 
 # Ordner in den gespeichert werden soll
-DATA_DIR = './sep4'
+DATA_DIR = './data'
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
-number_of_classes = 3
-dataset_size = 30
+number_of_classes = 26
+dataset_size = 50
 
 # Kamera
 desired_fps = 10  # Bilder pro Sekunde
