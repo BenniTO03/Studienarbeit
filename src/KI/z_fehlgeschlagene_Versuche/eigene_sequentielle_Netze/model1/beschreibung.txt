@@ -1,0 +1,4 @@
+- Model wird erfolgreich erstellt und trainiert
+- die Testbilder werden jedoch alle nicht korrekt erkannt
+
+-> deswegen wird Fehler bei der Zuordnung der Bilder zu den Labels vermutet

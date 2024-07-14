@@ -1,0 +1,7 @@
+cnn1_numpy.py und trainingshistorie.png:
+    - geringe accuracy
+    - Fehler bei Zuordnung von Bilder und Labels und beim Ertsllen und Trainieren des Modells
+
+cnn1_original.ipynb + cnn1_tensorflow.ipynb:
+    - Fehler beim Erstellen des Modells
+    - Error wegen unterschiedlicher Dimensionen
