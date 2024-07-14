@@ -1,0 +1,32 @@
+[INFO] training the network...
+Epoch [0], train_loss: 2.9120, train_acc: 0.1002, val_loss: 2.6113, val_acc: 0.1558
+Epoch [1], train_loss: 2.4151, train_acc: 0.2223, val_loss: 2.0977, val_acc: 0.3394
+Epoch [2], train_loss: 1.4661, train_acc: 0.5368, val_loss: 1.0611, val_acc: 0.6732
+Epoch [3], train_loss: 0.7469, train_acc: 0.7712, val_loss: 0.6849, val_acc: 0.7908
+Epoch [4], train_loss: 0.4996, train_acc: 0.8412, val_loss: 0.5563, val_acc: 0.8364
+Epoch [5], train_loss: 0.3246, train_acc: 0.8992, val_loss: 0.5093, val_acc: 0.8529
+Epoch [6], train_loss: 0.2212, train_acc: 0.9270, val_loss: 0.5776, val_acc: 0.8487
+Epoch [7], train_loss: 0.1736, train_acc: 0.9436, val_loss: 0.5925, val_acc: 0.8655
+Epoch [8], train_loss: 0.1181, train_acc: 0.9629, val_loss: 0.6208, val_acc: 0.8649
+Epoch [9], train_loss: 0.0924, train_acc: 0.9706, val_loss: 0.6117, val_acc: 0.8673
+Epoch [10], train_loss: 0.0672, train_acc: 0.9786, val_loss: 0.6198, val_acc: 0.8768
+Epoch [11], train_loss: 0.0592, train_acc: 0.9820, val_loss: 0.7525, val_acc: 0.8702
+Epoch [12], train_loss: 0.0772, train_acc: 0.9763, val_loss: 0.5885, val_acc: 0.8829
+Epoch [13], train_loss: 0.0429, train_acc: 0.9871, val_loss: 0.7136, val_acc: 0.8864
+Epoch [14], train_loss: 0.0266, train_acc: 0.9920, val_loss: 0.7457, val_acc: 0.8752
+Epoch [15], train_loss: 0.0628, train_acc: 0.9811, val_loss: 0.7235, val_acc: 0.8588
+Epoch [16], train_loss: 0.0495, train_acc: 0.9860, val_loss: 0.6905, val_acc: 0.8774
+Epoch [17], train_loss: 0.0348, train_acc: 0.9905, val_loss: 0.7698, val_acc: 0.8835
+Epoch [18], train_loss: 0.0226, train_acc: 0.9940, val_loss: 0.7957, val_acc: 0.8881
+Epoch [19], train_loss: 0.0464, train_acc: 0.9868, val_loss: 0.6957, val_acc: 0.8920
+Epoch [20], train_loss: 0.0255, train_acc: 0.9922, val_loss: 0.8061, val_acc: 0.8856
+Epoch [21], train_loss: 0.0303, train_acc: 0.9918, val_loss: 0.7694, val_acc: 0.8691
+Epoch [22], train_loss: 0.0493, train_acc: 0.9867, val_loss: 0.6262, val_acc: 0.8850
+Epoch [23], train_loss: 0.0258, train_acc: 0.9923, val_loss: 0.6999, val_acc: 0.8930
+Epoch [24], train_loss: 0.0163, train_acc: 0.9953, val_loss: 0.8264, val_acc: 0.8880
+Epoch [25], train_loss: 0.0257, train_acc: 0.9937, val_loss: 0.7534, val_acc: 0.8913
+Epoch [26], train_loss: 0.0187, train_acc: 0.9948, val_loss: 0.7626, val_acc: 0.8940
+Epoch [27], train_loss: 0.0185, train_acc: 0.9957, val_loss: 0.6839, val_acc: 0.8885
+Epoch [28], train_loss: 0.0201, train_acc: 0.9943, val_loss: 0.7452, val_acc: 0.8921
+Epoch [29], train_loss: 0.0287, train_acc: 0.9913, val_loss: 0.6727, val_acc: 0.8881
+[INFO] total time taken to train the model: 225.25min
