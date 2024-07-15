@@ -33,4 +33,6 @@ Repository für unsere Studienarbeit im 5. und 6. Semester
 
 2. Roboter: Basisanleitung zum Bau eines LEGO Mindstorms Roboters
 3. Zusammenführung: Programmcode zum fertigen Ablauf, wie auf DHBW-Präsentationstag vorgeführt
+    1. work_cap: Probeversion auf dem Laptop
+    2. work_pi: Entgültige Version auf dem Raspberry PI
 ```
