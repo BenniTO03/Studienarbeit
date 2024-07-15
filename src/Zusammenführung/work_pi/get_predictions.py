@@ -68,7 +68,7 @@ class NaturalSceneClassification(ImageClassificationBase):
         return self.network(xb)
 
 
-class Model():
+class Model:
     # translation dictionary between label and letter
     label_to_letter = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6:'g', 7:'h', 8:'i', 9:'j', 10:'k', 11:'l', 12:'m', 13:'n', 14:'o', 15:'p', 16:'q', 17:'r', 18:'s', 
                    19:'t', 20:'u', 21:'v', 22:'w', 23:'x', 24:'y', 25: 'z'}
@@ -87,7 +87,11 @@ class Model():
         for image_name in natsorted(os.listdir(data_dir)):
             image_path = os.path.join(data_dir, image_name)
             image = Image.open(image_path)
+            #grayscale_image = image.convert('L')  # einkommentieren für graue Bilder
+            #grayscale_image.save(image_path)  # einkommentieren für graue Bilder
+            #print(f"Gespeichert: {image_path}")   # einkommentieren für graue Bilder
             image_tensor = transform(image).unsqueeze(0) # add channel
+            # image_tensor = transform(grayscale_image).unsqueeze(0)  # einkommentieren für graue Bilder
 
             output = model(image_tensor)  # put images into model
 
@@ -101,7 +105,11 @@ class Model():
 
 
     def predict_image(self):
-        model = torch.load(self.model_path)
+        model = torch.load(self.model_path, map_location=torch.device('cpu'))
+        # model = torch.load_state_dict(torch.load(self.model_path, map_location=torch.device('cpu')))
+        #model = NaturalSceneClassification()
+        #model.load_state_dict(torch.load(self.model_path, map_location=torch.device('cpu')))
         model.eval() # set model in evaluation mode
         predicted_letters = self.prediction(model, self.data_dir) # get all predicted letters
         return predicted_letters
+
